@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cafes.Net_MAUI_App.View.CafeDetailsPage"
+             xmlns:viewmodel="clr-namespace:Cafes.Net_MAUI_App.ViewModel"
+             x:DataType="viewmodel:CafeDetailsViewModel"
+             Title="{Binding Title}">
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid ColumnDefinitions="*,Auto,*"
+                  RowDefinitions="110,Auto">
+
+                <BoxView Color="{StaticResource Primary}" 
+                         Grid.ColumnSpan="3"
+                         HeightRequest="110"
+                         HorizontalOptions="FillAndExpand"/>
+
+                <Frame Grid.RowSpan="2"
+                       Grid.Column="1"
+                       HeightRequest="150"
+                       WidthRequest="150"
+                       CornerRadius="75"
+                       HorizontalOptions="Center"
+                       IsClippedToBounds="True"
+                       Padding="0"
+                       Margin="0,30,0,0">
+                    
+                    <Image Source="coffee_logo.png"
+                           Aspect="AspectFill"
+                           WidthRequest="140"
+                           HeightRequest="140"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                </Frame>
+            </Grid>
+            
+            <VerticalStackLayout HorizontalOptions="Center" Padding="10" Spacing="5"
+                                 Margin="0,30,0,0 ">
+                
+                <Button 
+                    Text="Show on Map"
+                    Command="{Binding OpenMapCommand}"
+                    HorizontalOptions="Center"
+                    WidthRequest="200"
+                    HeightRequest="40"
+                    Margin="0,0,0,25"/>
+
+                <Grid RowDefinitions="*,*,*,*,Auto"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Center"
+                      RowSpacing="10">
+                    
+                    <Label Text="{Binding CafeDto.CafeName}"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           TextColor="SaddleBrown"
+                           CharacterSpacing="0.5"/>
+
+                    <Label Grid.Row="1"
+                           FontSize="18"
+                           HorizontalTextAlignment="Center"
+                           FontAttributes="Bold">
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}{0} | {1} {2}">
+                                <Binding Path=" CafeDto.Street" />
+                                <Binding Path=" CafeDto.PostalCode" />
+                                <Binding Path=" CafeDto.City" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+
+                    <Label Grid.Row="2"
+                           FontSize="16"
+                           HorizontalTextAlignment="Center"
+                           TextColor="DarkGreen">
+                        <Label.Text>
+                            <MultiBinding StringFormat="{} OPEN: {0}       CLOSE: {1}">
+                                <Binding Path=" CafeDto.OpeningTime" />
+                                <Binding Path=" CafeDto.ClosingTime" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+
+                    <Grid Grid.Row="3"
+                          ColumnDefinitions="*,*,*"
+                          RowDefinitions="*,*"
+                          HorizontalOptions="FillAndExpand"
+                          VerticalOptions="Center"
+                          Margin="0,20,0,0">
+
+                        <Label
+                            Text="COFFEE"
+                            FontSize="12"
+                            HorizontalTextAlignment="Center"
+                            CharacterSpacing="0.5"/>
+
+                        <Label
+                            Grid.Column="1"
+                            Text="WIFI"
+                            FontSize="12"
+                            HorizontalTextAlignment="Center"
+                            CharacterSpacing="0.5"/>
+
+                        <Label 
+                            Grid.Column="2"
+                            Text="POWER"
+                            FontSize="12"
+                            HorizontalTextAlignment="Center"
+                            CharacterSpacing="0.5"/>
+
+                        <Label
+                            Grid.Row="1"
+                            VerticalOptions="Center"
+                            Text="{Binding CafeDto.CoffeeRating}"
+                            FontSize="18"
+                            HorizontalTextAlignment="Center"
+                            CharacterSpacing="0.5"
+                            MinimumHeightRequest="50"/>
+                        
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            VerticalOptions="Center"
+                            Text="{Binding CafeDto.WifiRating}"
+                            FontSize="18"
+                            HorizontalTextAlignment="Center"
+                            CharacterSpacing="0.5"
+                            MinimumHeightRequest="50"/>
+                        
+                        <Label 
+                            Grid.Column="2"
+                            Grid.Row="1"
+                            VerticalOptions="Center"
+                            Text="{Binding CafeDto.PwrSocketRating}"
+                            FontSize="18"
+                            HorizontalTextAlignment="Center"
+                            CharacterSpacing="0.5"
+                            MinimumHeightRequest="50"/>
+
+                    </Grid>
+
+                    <Label 
+                        Grid.Row="4"
+                        Margin="10,20,10,0"
+                        VerticalOptions="Start"
+                        FontAttributes="Italic"
+                        TextColor="#755423"
+                        Text="{Binding CafeDto.Description}"/>
+
+                </Grid>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

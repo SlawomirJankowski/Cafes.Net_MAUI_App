@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:CoffeeAndWifi.WebApi.Models.Dtos"
+             xmlns:viewmodel="clr-namespace:Cafes.Net_MAUI_App.ViewModel"
+             x:DataType="viewmodel:CafesViewModel"
+             Title="{Binding Title}"
+             x:Class="Cafes.Net_MAUI_App.MainPage">
+
+
+    <Grid ColumnDefinitions="*,*"
+          ColumnSpacing="5"
+          RowDefinitions="Auto,*, Auto"
+          RowSpacing="0">
+        <SearchBar 
+            x:Name="searchBar"
+            Placeholder="Enter City name to find Cafes there"
+            HorizontalOptions="Center"
+            Grid.ColumnSpan="2"
+            SearchCommand="{Binding GetCafesInCityCommand}"
+            SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+        <RefreshView 
+            x:DataType="viewmodel:CafesViewModel" 
+            Command="{Binding GetCafesCommand}"
+            IsRefreshing="{Binding IsRefreshing}"
+            Grid.ColumnSpan="2"
+            Grid.Row="1">
+            <CollectionView 
+                BackgroundColor="Transparent"                      
+                ItemsSource="{Binding Cafes}"  
+                SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:CafeDto">
+                        <Grid Padding="7">
+                            <Frame HeightRequest="110" BackgroundColor="{StaticResource Secondary}" Padding="0">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        NumberOfTapsRequired="1"
+                                        CommandParameter="{Binding .}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CafesViewModel}}, Path=GoToCafeDetailsCommand}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid 
+                                    Padding="0" 
+                                    ColumnDefinitions="110, *">
+
+                                    <Image 
+                                        Source="coffee_logo.png" 
+                                        WidthRequest="80" 
+                                        HeightRequest="80"/>
+
+                                    <VerticalStackLayout 
+                                        Grid.Column="1" 
+                                        Padding="2" 
+                                        Spacing="3" 
+                                        VerticalOptions="Center">
+
+                                        <Label Text="{Binding CafeName}" 
+                                        LineBreakMode="NoWrap" 
+                                        Style="{DynamicResource ListItemTextStyle}" 
+                                        FontSize="16"
+                                        FontAttributes="Bold"
+                                        TextColor="SaddleBrown"/>
+
+                                        <Label Text="{Binding Street}" 
+                                        LineBreakMode="NoWrap"
+                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                        FontSize="13" />
+
+                                        <Label VerticalOptions="Center">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}{0} | {1}">
+                                                    <Binding Path="PostalCode" />
+                                                    <Binding Path="City" />
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </RefreshView>
+
+        <Button Text="All Cafes"
+                Command="{Binding GetCafesCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Grid.Row="2"
+                Margin="8"/>
+
+        <Button Text="Find Closest Cafes"
+                Command="{Binding GetClosestCafesCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="8"/>
+
+        <ActivityIndicator
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="2"
+            HorizontalOptions="Fill"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            Color="{StaticResource Primary}"
+            VerticalOptions="Center" />
+        
+    </Grid>
+
+</ContentPage>
