@@ -13,4 +13,4 @@
 - Aplikacja mobilna oparta na danych pobieranych z API [Coffee.And.Wifi-Web.API](https://github.com/SlawomirJankowski/CoffeeAndWifi.WebApi.git)
 - Dane pobierane w formacie JSON
 - Aplikacja korzysta z geolokacji -> IGeolocation
-- Sprawdzane jest połączenie z internetem -> IConnectivity
+- Sprawdzanie połączenia z internetem -> IConnectivity
