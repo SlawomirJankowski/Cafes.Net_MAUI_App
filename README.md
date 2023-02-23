@@ -4,7 +4,7 @@
 ## Opis
 - Aplikacja mobilna prezentująca dane kawiarni umożliwiających pracę zdalną
 - Wyszukiwanie kawiarni według miejscowości
-- Wyszukiwanie kawiarni względem aktualnej lokalizacji - od najbliższej kawiarni
+- Wyszukiwanie kawiarni względem aktualnej lokalizacji - dane prezentowane względem najmniejszej odległości do kawiarni
 - Przekierowanie do aplikacji z mapami po wyborze konkretenej kawiarni
 - Link do wideo prezentującego aplikację [Cafes Mobile](https://1drv.ms/v/s!AplwdM53iJI9gYx2PlZ5hBzWVPDvaA?e=aCqpYm) 
 
