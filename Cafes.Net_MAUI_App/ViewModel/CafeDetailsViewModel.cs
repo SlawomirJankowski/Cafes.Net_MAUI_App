@@ -1,7 +1,6 @@
 ﻿using CoffeeAndWifi.WebApi.Models.Dtos;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
 
 namespace Cafes.Net_MAUI_App.ViewModel
 {
